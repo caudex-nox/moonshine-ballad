@@ -1,6 +1,12 @@
-# Moonshine Ballad
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/mb-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/mb-light.svg">
+    <img src="assets/mb-light.svg" width="200" alt="Moonshine Ballad">
+  </picture>
+</p>
 
-> *Notas destiladas a la luz de la luna.*
+<h6 align="center">Notas destiladas a la luz de la luna</h6>
 
 Plataforma de comercio electrónico orientada a la venta de whiskies finos y destilados artesanales, desarrollada como Trabajo Práctico Integrador para la asignatura **Bases de Datos I**. El proyecto incluye gestión de catálogo, control de pedidos y un sistema de control de acceso basado en roles (**Admin** y **Cliente**), respaldado por una arquitectura REST conectada a una base de datos relacional en la nube.
 
