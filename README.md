@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/mb-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="assets/mb-light.svg">
-    <img src="assets/mb-light.svg" width="200" alt="Moonshine Ballad">
+    <img src="assets/mb-light.svg" width="350" alt="Moonshine Ballad">
   </picture>
 </p>
 
