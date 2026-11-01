@@ -108,7 +108,6 @@ erDiagram
         int id_venta_fk FK
         int id_producto_fk FK
         int cantidad
-        decimal precio_unitario
     }
 ```
 
@@ -220,7 +219,6 @@ erDiagram
 - **`id_venta_fk`** (FK, INT) — Referencia a `ventas`.
 - **`id_producto_fk`** (FK, INT) — Referencia a `productos`.
 - **`cantidad`** (INT)
-- **`precio_unitario`** (DECIMAL(10, 2))
 
 ---
 
