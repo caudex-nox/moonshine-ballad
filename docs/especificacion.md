@@ -207,7 +207,6 @@ erDiagram
 - **`id_empleado_fk`** (FK, INT, Nullable) — Referencia a `usuarios`.
 - **`id_domicilio_envio_fk`** (FK, INT) — Referencia a `domicilios`.
 - **`fecha_venta`** (DATETIME)
-- **`total`** (DECIMAL(12, 2))
 - **`metodo_pago`** (VARCHAR(30)) — (*Efectivo*, *Tarjeta*, *Transferencia*).
 - **`estado`** (VARCHAR(20)) — (*Pendiente*, *Pagado*, *Enviado*, *Cancelado*).
 
