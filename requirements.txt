@@ -1,0 +1,19 @@
+# Framework principal y Servidor ASGI
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+pydantic>=2.6.0
+pydantic-settings>=2.2.0
+
+# Base de Datos y ORM (TiDB Cloud / MySQL)
+sqlalchemy>=2.0.28
+pymysql>=1.1.0
+cryptography>=42.0.5
+python-dotenv>=1.0.1
+
+# Seguridad, Autenticación y JWT
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+python-multipart>=0.0.9
+
+# Motor de Plantillas (Frontend server-side)
+jinja2>=3.1.3
