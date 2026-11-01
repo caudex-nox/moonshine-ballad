@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Panel de Control — Moonshine Ballad{% endblock %}
+{% block nav_admin %}active{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+  <h1 style="font-family: Georgia, serif; color: var(--accent-gold);">Gestión de Inventario</h1>
+  <button class="cart-btn" onclick="alert('Abrir Modal de alta de producto')">+ Nuevo Producto</button>
+</div>
+
+<div class="table-responsive">
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Producto</th>
+        <th>Categoría</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>#1</td>
+        <td>Lagavulin 16 Años</td>
+        <td><span class="badge badge-amber">Single Malt</span></td>
+        <td>$145.000</td>
+        <td>8 u.</td>
+        <td>
+          <button class="nav-btn" style="padding: 0.2rem 0.5rem;">Editar</button>
+        </td>
+      </tr>
+      <tr>
+        <td>#2</td>
+        <td>Woodford Reserve</td>
+        <td><span class="badge badge-amber">Bourbon</span></td>
+        <td>$68.000</td>
+        <td>15 u.</td>
+        <td>
+          <button class="nav-btn" style="padding: 0.2rem 0.5rem;">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}

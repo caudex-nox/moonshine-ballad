@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Catálogo — Moonshine Ballad{% endblock %}
+{% block nav_store %}active{% endblock %}
+
+{% block content %}
+<div class="hero-banner">
+  <h1 class="hero-title">Notas destiladas a la luz de la luna</h1>
+  <p class="hero-subtitle">Selección exclusiva de whiskies finos y destilados artesanales</p>
+</div>
+
+<!-- Filtros de categoría -->
+<div style="display: flex; gap: 0.5rem; overflow-x: auto; padding: 1rem 0; margin-bottom: 1rem;">
+  <button onclick="filterProducts('All')" class="nav-btn active">Todos</button>
+  <button onclick="filterProducts('Single Malt')" class="nav-btn">Single Malt</button>
+  <button onclick="filterProducts('Bourbon')" class="nav-btn">Bourbon</button>
+  <button onclick="filterProducts('Blended')" class="nav-btn">Blended</button>
+</div>
+
+<!-- Grid de Productos -->
+<div id="productsGrid" class="grid-products">
+  <!-- Inyectado por main.js -->
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Moonshine Ballad{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="/" class="brand">
+    <img src="/static/img/mb-dark.svg" alt="Moonshine Ballad Logo" style="height: 32px; width: auto;">      <!-- <div class="brand-icon">🥃</div> -->
+      <span>Moonshine Ballad</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="/store" class="nav-btn {% block nav_store %}{% endblock %}">Tienda</a>
+      <a href="/admin" class="nav-btn {% block nav_admin %}{% endblock %}">Admin</a>
+      <a href="/login" class="nav-btn {% block nav_login %}{% endblock %}">Ingresar</a>
+      <button onclick="toggleCart()" class="cart-btn">
+        🛒 Carrito <span id="cartCount" class="cart-badge">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Contenido Dinámico -->
+  <main class="main-container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Overlay y Drawer del Carrito -->
+  <div id="drawerOverlay" class="drawer-overlay" onclick="toggleCart()"></div>
+  <aside id="cartDrawer" class="drawer">
+    <div class="drawer-header">
+      <h3 style="font-family: Georgia, serif;">Orden de Compra</h3>
+      <button onclick="toggleCart()" class="nav-btn" style="border:none;">✕</button>
+    </div>
+    <div id="cartItems" class="drawer-body">
+      <!-- Inyectado por JavaScript -->
+    </div>
+    <div class="drawer-footer">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <span>Total:</span>
+        <span id="cartTotal" style="color: var(--accent-gold); font-weight: 700;">$0</span>
+      </div>
+      <button class="btn-primary" onclick="alert('Conectando con API FastAPI /ventas...')">Finalizar Compra</button>
+    </div>
+  </aside>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
