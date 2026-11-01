@@ -29,8 +29,7 @@ erDiagram
     }
 
     CODIGOS_POSTALES {
-        int id_cod_postal PK
-        string codigo_postal UK
+        string codigo_postal PK
         string ciudad
         string provincia
     }
@@ -40,7 +39,8 @@ erDiagram
         int id_cod_postal_fk FK
         string calle
         string numero
-        string piso_dpto
+        string piso
+        string dpto
     }
 
     USUARIOS {
@@ -98,7 +98,6 @@ erDiagram
         int id_empleado_fk FK
         int id_domicilio_envio_fk FK
         datetime fecha_venta
-        decimal total
         string metodo_pago
         string estado
     }
