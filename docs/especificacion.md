@@ -1,138 +1,238 @@
-# Especificación de la Base de Datos
+# Especificación de la Base de Datos — Moonshine Ballad
 
 Diseño relacional, entidades, atributos, tipos de claves y relaciones que componen la base de datos.
 
 ---
 
-## 📋 Entidades y Atributos
+## 🎨 Diagrama de Entidades y Relaciones (Mermaid.js)
 
-### 1. Clientes
-Almacena la información personal y de contacto de los compradores.
+```mermaid
+erDiagram
+    ROLES ||--o{ USUARIOS : "asigna rol"
+    DOMICILIOS ||--o{ USUARIOS : "reside en"
+    CODIGOS_POSTALES ||--o{ DOMICILIOS : "pertenece a"
+    USUARIOS ||--o{ VENTAS : "compra (Cliente)"
+    USUARIOS ||--o{ VENTAS : "gestiona (Empleado)"
+    DOMICILIOS ||--o{ VENTAS : "destino envio"
+    DOMICILIOS ||--o{ PROVEEDORES : "ubicacion fiscal"
+    
+    CATEGORIAS ||--o{ PRODUCTOS : "agrupa"
+    MARCAS ||--o{ PRODUCTOS : "marca"
+    PROVEEDORES ||--o{ PRODUCTOS : "surtido por"
+    
+    VENTAS ||--|{ DETALLE_VENTAS : "contiene"
+    PRODUCTOS ||--o{ DETALLE_VENTAS : "figura en"
 
-* **`id_cliente`** (PK, INT, Auto-increment) — Identificador único del cliente.
-* **`nombre`** (VARCHAR(100)) — Nombre(s) del cliente.
-* **`apellido`** (VARCHAR(100)) — Apellido(s) del cliente.
-* **`dni_cuit`** (VARCHAR(20), Unique) — Documento o CUIT para facturación.
-* **`email`** (VARCHAR(150), Unique) — Correo electrónico (utilizado para inicio de sesión).
-* **`telefono`** (VARCHAR(20)) — Teléfono de contacto.
-* **`id_domicilio`** (FK, INT) — Referencia a la tabla `Domicilios`.
-* **`id_obra_social`** (FK, INT, Nullable) — Referencia opcional a `Obras_Sociales`.
-* **`fecha_registro`** (DATETIME) — Fecha de creación de la cuenta.
+    ROLES {
+        int id_rol PK
+        string nombre UK
+    }
 
----
+    CODIGOS_POSTALES {
+        int id_cod_postal PK
+        string codigo_postal UK
+        string ciudad
+        string provincia
+    }
 
-### 2. Productos (Whiskies y Destilados)
-Contiene la información técnica, comercial e inventario de los productos a la venta.
+    DOMICILIOS {
+        int id_domicilio PK
+        int id_cod_postal_fk FK
+        string calle
+        string numero
+        string piso_dpto
+    }
 
-* **`id_producto`** (PK, INT, Auto-increment) — Identificador único del producto.
-* **`nombre`** (VARCHAR(150)) — Nombre comercial del whisky.
-* **`descripcion`** (TEXT) — Descripción, notas de cata y origen.
-* **`precio`** (DECIMAL(10, 2)) — Precio unitario de venta.
-* **`stock`** (INT) — Cantidad disponible en inventario.
-* **`graduacion_alcoholica`** (DECIMAL(4, 1)) — Porcentaje de alcohol (ej: 43.0).
-* **`volumen_ml`** (INT) — Volumen en mililitros (ej: 750).
-* **`id_categoria`** (FK, INT) — Referencia a la tabla `Categorias`.
-* **`id_proveedor`** (FK, INT) — Referencia a la tabla `Proveedores`.
+    USUARIOS {
+        int id_usuario PK
+        int id_rol_fk FK
+        int id_domicilio_fk FK
+        string dni UK
+        string nombre
+        string apellido
+        string email UK
+        string tel_fijo
+        string tel_movil
+        string legajo UK
+        string cargo
+    }
 
----
+    CATEGORIAS {
+        int id_categoria PK
+        string nombre_categoria UK
+        string descripcion
+    }
 
-### 3. Proveedores
-Registra las empresas o distribuidores que abastecen la tienda.
+    MARCAS {
+        int id_marca PK
+        string nombre UK
+        string pais_origen
+    }
 
-* **`id_proveedor`** (PK, INT, Auto-increment) — Identificador único del proveedor.
-* **`razon_social`** (VARCHAR(150)) — Nombre o razón social de la empresa.
-* **`cuit`** (VARCHAR(20), Unique) — CUIT comercial del proveedor.
-* **`email`** (VARCHAR(150)) — Correo electrónico comercial.
-* **`telefono`** (VARCHAR(20)) — Teléfono de contacto.
-* **`id_domicilio`** (FK, INT) — Referencia a la tabla `Domicilios`.
+    PROVEEDORES {
+        int id_proveedor PK
+        string razon_social
+        string cuit UK
+        string email
+        string tel_fijo
+        string tel_movil
+        int id_domicilio_fk FK
+    }
 
----
+    PRODUCTOS {
+        int id_producto PK
+        int id_categoria_fk FK
+        int id_marca_fk FK
+        int id_proveedor_fk FK
+        string nombre
+        string descripcion
+        decimal precio
+        int stock
+        decimal abv
+        int volumen_ml
+    }
 
-### 4. Empleados
-Información del personal involucrado en la gestión de la tienda y procesamiento de ventas.
+    VENTAS {
+        int id_venta PK
+        int id_cliente_fk FK
+        int id_empleado_fk FK
+        int id_domicilio_envio_fk FK
+        datetime fecha_venta
+        decimal total
+        string metodo_pago
+        string estado
+    }
 
-* **`id_empleado`** (PK, INT, Auto-increment) — Identificador único del empleado.
-* **`nombre`** (VARCHAR(100)) — Nombre del empleado.
-* **`apellido`** (VARCHAR(100)) — Apellido del empleado.
-* **`legajo`** (VARCHAR(20), Unique) — Número de legajo interno.
-* **`cargo`** (VARCHAR(50)) — Rol ocupacional (ej: Vendedor, Encargado, Administrador).
-* **`email`** (VARCHAR(150), Unique) — Correo institucional.
-* **`telefono`** (VARCHAR(20)) — Teléfono de contacto.
-* **`id_domicilio`** (FK, INT) — Referencia a la tabla `Domicilios`.
-* **`id_obra_social`** (FK, INT, Nullable) — Referencia a la tabla `Obras_Sociales`.
-* **`fecha_ingreso`** (DATE) — Fecha de contratación.
-
----
-
-### 5. Ventas (Cabecera de Factura / Pedido)
-Registra cada transacción realizada en la plataforma.
-
-* **`id_venta`** (PK, INT, Auto-increment) — Identificador único de la transacción.
-* **`fecha_venta`** (DATETIME) — Fecha y hora de emisión.
-* **`total`** (DECIMAL(12, 2)) — Monto total acumulado de la venta.
-* **`metodo_pago`** (VARCHAR(50)) — Método utilizado (Efectivo, Tarjeta, Transferencia).
-* **`estado`** (VARCHAR(30)) — Estado del pedido (Pendiente, Pagado, Enviado, Cancelado).
-* **`id_cliente`** (FK, INT) — Cliente que realiza la compra.
-* **`id_empleado`** (FK, INT) — Empleado que procesa o valida la transacción.
-
----
-
-### 6. Detalle_Ventas (Tabla Intermedia)
-Desglosa los items o productos asociados a cada cabecera de venta.
-
-* **`id_detalle`** (PK, INT, Auto-increment) — Identificador del renglón de detalle.
-* **`id_venta`** (FK, INT) — Venta a la que pertenece el detalle.
-* **`id_producto`** (FK, INT) — Producto comprado.
-* **`cantidad`** (INT) — Unidades adquiridas.
-* **`precio_unitario`** (DECIMAL(10, 2)) — Precio histórico del producto al momento de la venta.
-* **`subtotal`** (DECIMAL(10, 2)) — Cálculo (`cantidad` * `precio_unitario`).
-
----
-
-## Tablas Auxiliares y Entidades de Soporte
-
-### 7. Domicilios
-Desacopla la ubicación física para su reutilización en Clientes, Empleados y Proveedores.
-
-* **`id_domicilio`** (PK, INT, Auto-increment) — Identificador de dirección.
-* **`calle`** (VARCHAR(100)) — Nombre de la calle.
-* **`numero`** (VARCHAR(10)) — Numeración de la finca.
-* **`piso_depto`** (VARCHAR(10), Nullable) — Datos de departamento o piso.
-* **`barrio`** (VARCHAR(100)) — Barrio / Localidad.
-* **`ciudad`** (VARCHAR(100)) — Ciudad principal.
-* **`provincia`** (VARCHAR(100)) — Provincia / Estado.
-* **`codigo_postal`** (VARCHAR(15)) — Código postal.
-
----
-
-### 8. Obras_Sociales
-Almacena las entidades prestadoras de servicios de salud para el personal.
-
-* **`id_obra_social`** (PK, INT, Auto-increment) — Identificador de la obra social.
-* **`nombre_obra_social`** (VARCHAR(150)) — Nombre o razón social de la entidad.
-* **`cuit`** (VARCHAR(20), Unique) — CUIT de la institución médica.
-* **`cobertura_plan`** (VARCHAR(100)) — Tipo o código de plan contratado.
+    DETALLE_VENTAS {
+        int id_detalle PK
+        int id_venta_fk FK
+        int id_producto_fk FK
+        int cantidad
+    }
+```
 
 ---
 
-### 9. Categorias
-Clasifica los productos según el tipo de destilado o procedencia.
+## 📑 Especificación de Tablas y Atributos
 
-* **`id_categoria`** (PK, INT, Auto-increment) — Identificador de categoría.
-* **`nombre_categoria`** (VARCHAR(100)) — Ej: *Single Malt, Bourbon, Blended, Rye*.
-* **`descripcion`** (TEXT) — Breve reseña del estilo de whisky.
+### 1. Rol (`roles`)
+
+- **`id_rol`** (PK, INT, Auto-increment)
+- **`nombre`** (VARCHAR(30), Unique) — (`Admin`, `Cliente`).
+
+---
+
+### 2. Codigo_Postal (`codigos_postales`)
+
+- **`id_cod_postal`** (PK, INT, Auto-increment)
+- **`codigo_postal`** (VARCHAR(15), Unique)
+- **`ciudad`** (VARCHAR(30))
+- **`provincia`** (VARCHAR(30))
+
+---
+
+### 3. Domicilio (`domicilios`)
+
+- **`id_domicilio`** (PK, INT, Auto-increment)
+- **`id_cod_postal_fk`** (FK, INT) — Referencia a `codigos_postales`.
+- **`calle`** (VARCHAR(50))
+- **`numero`** (VARCHAR(10))
+- **`piso_dpto`** (VARCHAR(10), Nullable)
+
+---
+
+### 4. Usuario (`usuarios`)
+
+- **`id_usuario`** (PK, INT, Auto-increment)
+- **`id_rol_fk`** (FK, INT) — Referencia a `roles`.
+- **`id_domicilio_fk`** (FK, INT) — Referencia a `domicilios`.
+- **`dni`** (VARCHAR(20), Unique)
+- **`nombre`** (VARCHAR(30))
+- **`apellido`** (VARCHAR(30))
+- **`email`** (VARCHAR(40), Unique)
+- **`tel_fijo`** (VARCHAR(20), Nullable)
+- **`tel_movil`** (VARCHAR(20), Nullable)
+- **`legajo`** (VARCHAR(20), Unique, Nullable)
+- **`cargo`** (VARCHAR(30), Nullable)
+
+---
+
+### 5. Categoria (`categorias`)
+
+- **`id_categoria`** (PK, INT, Auto-increment)
+- **`nombre_categoria`** (VARCHAR(30), Unique) — (*Single Malt*, *Bourbon*, *Rye*, *Blended*).
+- **`descripcion`** (TEXT, Nullable)
+
+---
+
+### 6. Marca (`marcas`)
+
+- **`id_marca`** (PK, INT, Auto-increment)
+- **`nombre`** (VARCHAR(30), Unique)
+- **`pais_origen`** (VARCHAR(30))
+
+---
+
+### 7. Proveedor (`proveedores`)
+
+- **`id_proveedor`** (PK, INT, Auto-increment)
+- **`razon_social`** (VARCHAR(30))
+- **`cuit`** (VARCHAR(20), Unique)
+- **`email`** (VARCHAR(40))
+- **`tel_fijo`** (VARCHAR(20))
+- **`tel_movil`** (VARCHAR(20))
+- **`id_domicilio_fk`** (FK, INT, Nullable) — Referencia a `domicilios`.
+
+---
+
+### 8. Producto (`productos`)
+
+- **`id_producto`** (PK, INT, Auto-increment)
+- **`id_categoria_fk`** (FK, INT) — Referencia a `categorias`.
+- **`id_marca_fk`** (FK, INT) — Referencia a `marcas`.
+- **`id_proveedor_fk`** (FK, INT, Nullable) — Referencia a `proveedores`.
+- **`nombre`** (VARCHAR(30))
+- **`descripcion`** (TEXT)
+- **`precio`** (DECIMAL(10, 2))
+- **`stock`** (INT)
+- **`abv`** (DECIMAL(4, 1)) — Graduación alcohólica (% ABV).
+- **`volumen_ml`** (INT)
+
+---
+
+### 9. Venta (`ventas`)
+
+- **`id_venta`** (PK, INT, Auto-increment)
+- **`id_cliente_fk`** (FK, INT) — Referencia a `usuarios`.
+- **`id_empleado_fk`** (FK, INT, Nullable) — Referencia a `usuarios`.
+- **`id_domicilio_envio_fk`** (FK, INT) — Referencia a `domicilios`.
+- **`fecha_venta`** (DATETIME)
+- **`total`** (DECIMAL(12, 2))
+- **`metodo_pago`** (VARCHAR(30)) — (*Efectivo*, *Tarjeta*, *Transferencia*).
+- **`estado`** (VARCHAR(20)) — (*Pendiente*, *Pagado*, *Enviado*, *Cancelado*).
+
+---
+
+### 10. Detalle_Venta (`detalle_ventas`)
+
+- **`id_detalle`** (PK, INT, Auto-increment)
+- **`id_venta_fk`** (FK, INT) — Referencia a `ventas`.
+- **`id_producto_fk`** (FK, INT) — Referencia a `productos`.
+- **`cantidad`** (INT)
 
 ---
 
 ## 🔗 Resumen de Relaciones y Cardinalidades
 
-1. **Domicilios 1 : N Clientes** — Un domicilio puede estar asociado a varios clientes (ej: grupo familiar), pero un cliente pertenece a un único domicilio registrado.
-2. **Domicilios 1 : N Empleados** — Un domicilio puede pertenecer a uno o más empleados.
-3. **Domicilios 1 : N Proveedores** — Un domicilio asignado por proveedor.
-4. **Obras_Sociales 1 : N Empleados** — Una obra social cubre a uno o varios empleados.
-5. **Categorias 1 : N Productos** — Una categoría agrupa múltiples whiskies.
-6. **Proveedores 1 : N Productos** — Un proveedor surte varios tipos de whiskies.
-7. **Clientes 1 : N Ventas** — Un cliente realiza cero, una o muchas compras.
-8. **Empleados 1 : N Ventas** — Un empleado gestiona cero, una o múltiples ventas.
-9. **Ventas 1 : N Detalle_Ventas** — Una venta contiene de 1 a N renglones de detalle.
-10. **Productos 1 : N Detalle_Ventas** — Un producto puede figurar en varios detalles de venta.
+1. **`roles` 1 : N `usuarios`** — Un rol (Admin/Cliente) asigna permisos a múltiples usuarios.
+2. **`codigos_postales` 1 : N `domicilios`** — Un código postal agrupa múltiples domicilios.
+3. **`domicilios` 1 : N `usuarios`** — Un domicilio asignado a cada usuario.
+4. **`domicilios` 1 : N `proveedores`** — Un domicilio fiscal asociado a un proveedor.
+5. **`categorias` 1 : N `productos`** — Una categoría agrupa múltiples whiskies.
+6. **`marcas` 1 : N `productos`** — Una marca embotella múltiples whiskies.
+7. **`proveedores` 1 : N `productos`** — Un proveedor surte variados licores.
+8. **`usuarios` (Cliente) 1 : N `ventas`** — Un cliente realiza cero, una o muchas compras.
+9. **`usuarios` (Empleado) 1 : N `ventas`** — Un empleado gestiona cero, una o muchas ventas.
+10. **`domicilios` 1 : N `ventas`** — Un domicilio sirve como destino de envío de 0 a N ventas.
+11. **`ventas` 1 : N `detalle_ventas`** — Una venta contiene de 1 a N renglones de detalle.
+12. **`productos` 1 : N `detalle_ventas`** — Un producto se incluye en múltiples detalles de venta.
