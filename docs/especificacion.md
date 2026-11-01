@@ -124,8 +124,7 @@ erDiagram
 
 ### 2. Codigo_Postal (`codigos_postales`)
 
-- **`id_cod_postal`** (PK, INT, Auto-increment)
-- **`codigo_postal`** (VARCHAR(15), Unique)
+- **`CP`** (PK, VARCHAR(15), Unique)
 - **`ciudad`** (VARCHAR(30))
 - **`provincia`** (VARCHAR(30))
 
@@ -137,7 +136,8 @@ erDiagram
 - **`id_cod_postal_fk`** (FK, INT) — Referencia a `codigos_postales`.
 - **`calle`** (VARCHAR(50))
 - **`numero`** (VARCHAR(10))
-- **`piso_dpto`** (VARCHAR(10), Nullable)
+- **`piso`** (VARCHAR(10), Nullable)
+- **`dpto`** (VARCHAR(10), Nullable)
 
 ---
 
