@@ -10,20 +10,25 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <a href="/" class="brand">
-    <img src="/static/img/mb-dark.svg" alt="Moonshine Ballad Logo" style="height: 32px; width: auto;">      <!-- <div class="brand-icon">🥃</div> -->
-      <span>Moonshine Ballad</span>
+    <a href="https://github.com/caudex-nox/moonshine-ballad" class="brand" aria-label="Moonshine Ballad | Repositorio">
+      <img src="/static/img/gh-dark.svg" alt="Moonshine Ballad | Repositorio">
     </a>
 
     <div class="nav-links">
       <a href="/store" class="nav-btn {% block nav_store %}{% endblock %}">Tienda</a>
       <a href="/admin" class="nav-btn {% block nav_admin %}{% endblock %}">Admin</a>
-      <a href="/login" class="nav-btn {% block nav_login %}{% endblock %}">Ingresar</a>
+      <label class="active-user">
+        <span>Usuario activo</span>
+        <select id="activeUserSelector" aria-label="Seleccionar usuario activo">
+          <option value="">Seleccionar cliente</option>
+        </select>
+      </label>
       <button onclick="toggleCart()" class="cart-btn">
         🛒 Carrito <span id="cartCount" class="cart-badge">0</span>
       </button>
     </div>
   </nav>
+  <div id="frontNotice" class="front-notice" role="status" aria-live="polite"></div>
 
   <!-- Contenido Dinámico -->
   <main class="main-container">
@@ -45,7 +50,7 @@
         <span>Total:</span>
         <span id="cartTotal" style="color: var(--accent-gold); font-weight: 700;">$0</span>
       </div>
-      <button class="btn-primary" onclick="alert('Conectando con API FastAPI /ventas...')">Finalizar Compra</button>
+      <button class="btn-primary" onclick="checkout()">Finalizar Compra</button>
     </div>
   </aside>
 

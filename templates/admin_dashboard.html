@@ -1,48 +1,71 @@
 {% extends "base.html" %}
-
-{% block title %}Panel de Control — Moonshine Ballad{% endblock %}
+{% block title %}Administración — Moonshine Ballad{% endblock %}
 {% block nav_admin %}active{% endblock %}
-
 {% block content %}
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-  <h1 style="font-family: Georgia, serif; color: var(--accent-gold);">Gestión de Inventario</h1>
-  <button class="cart-btn" onclick="alert('Abrir Modal de alta de producto')">+ Nuevo Producto</button>
+<div class="page-heading">
+  <div><p class="eyebrow">ÁREA DEMO · ADMINISTRACIÓN</p><h1>Panel de gestión</h1><p class="muted">Administra el catálogo y los datos de la tienda.</p></div>
+  <div class="profile-picker"><label for="adminSelector">Administrador activo</label><select id="adminSelector" class="form-control compact"></select></div>
 </div>
-
-<div class="table-responsive">
-  <table class="admin-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Producto</th>
-        <th>Categoría</th>
-        <th>Precio</th>
-        <th>Stock</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>#1</td>
-        <td>Lagavulin 16 Años</td>
-        <td><span class="badge badge-amber">Single Malt</span></td>
-        <td>$145.000</td>
-        <td>8 u.</td>
-        <td>
-          <button class="nav-btn" style="padding: 0.2rem 0.5rem;">Editar</button>
-        </td>
-      </tr>
-      <tr>
-        <td>#2</td>
-        <td>Woodford Reserve</td>
-        <td><span class="badge badge-amber">Bourbon</span></td>
-        <td>$68.000</td>
-        <td>15 u.</td>
-        <td>
-          <button class="nav-btn" style="padding: 0.2rem 0.5rem;">Editar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<div id="adminNotice" class="notice" role="status"></div>
+<nav class="admin-tabs" aria-label="Secciones de administración">
+  <button class="admin-tab active" data-admin-section="products">Productos</button>
+  <button class="admin-tab" data-admin-section="users">Usuarios</button>
+  <button class="admin-tab" data-admin-section="categories">Categorías</button>
+  <button class="admin-tab" data-admin-section="brands">Marcas</button>
+</nav>
+<section class="admin-layout">
+  <div class="panel admin-section" data-admin-panel="products">
+    <div class="panel-heading"><div><p class="section-kicker">Catálogo</p><h2>Productos</h2></div><button id="newProductButton" class="btn-primary small">Nuevo producto</button></div>
+    <div class="table-responsive"><table class="admin-table"><thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th></th></tr></thead><tbody id="adminProducts"><tr><td colspan="5" class="loading">Cargando inventario...</td></tr></tbody></table></div>
+  </div>
+  <aside class="panel product-form-panel admin-section" data-admin-panel="products">
+    <div class="panel-heading"><div><p class="section-kicker">Edición</p><h2 id="formTitle">Nuevo producto</h2></div><button id="cancelProductButton" class="icon-button" type="button" aria-label="Cancelar">×</button></div>
+    <form id="productForm">
+      <input type="hidden" id="productId">
+      <div class="form-group"><label for="productName">Nombre</label><input id="productName" class="form-control" maxlength="30" required></div>
+      <div class="form-row"><div class="form-group"><label for="productCategory">Categoría</label><select id="productCategory" class="form-control" required></select></div><div class="form-group"><label for="productBrand">Marca</label><select id="productBrand" class="form-control" required></select></div></div>
+      <div class="form-row"><div class="form-group"><label for="productPrice">Precio <small>(sin “$”)</small></label><div class="currency-input"><span>$</span><input id="productPrice" class="form-control" type="number" min="0" step="0.01" inputmode="decimal" placeholder="52700" required></div></div><div class="form-group"><label for="productStock">Stock</label><input id="productStock" class="form-control" type="number" min="0" required></div></div>
+      <div class="form-row"><div class="form-group"><label for="productAbv">ABV (%)</label><input id="productAbv" class="form-control" type="number" min="0" max="100" step="0.1" required></div><div class="form-group"><label for="productVolume">Volumen (ml)</label><input id="productVolume" class="form-control" type="number" min="1" required></div></div>
+      <div class="form-group"><label for="productDescription">Descripción</label><textarea id="productDescription" class="form-control" rows="3"></textarea></div>
+      <button class="btn-primary" type="submit">Guardar cambios</button>
+    </form>
+  </aside>
+</section>
+<section class="admin-section hidden" data-admin-panel="users">
+  <div class="panel"><div class="panel-heading"><div><p class="section-kicker">Personas</p><h2>Usuarios</h2></div><button id="newUserButton" class="btn-primary small" type="button">Nuevo usuario</button></div>
+    <div class="table-responsive"><table class="admin-table"><thead><tr><th>Nombre</th><th>Email</th><th>Rol</th><th>Contacto</th><th></th></tr></thead><tbody id="adminUsers"><tr><td colspan="5" class="loading">Cargando usuarios...</td></tr></tbody></table></div>
+  </div>
+  <div class="panel admin-edit-panel">
+    <div class="panel-heading"><div><p class="section-kicker">Edición</p><h2 id="userFormTitle">Crear usuario</h2></div><button id="cancelUserButton" class="icon-button" type="button">×</button></div>
+    <form id="userForm" class="admin-form">
+      <input type="hidden" id="userId">
+      <div class="form-row"><div class="form-group"><label>Nombre</label><input id="userName" class="form-control" required></div><div class="form-group"><label>Apellido</label><input id="userLastName" class="form-control" required></div></div>
+      <div class="form-row"><div class="form-group"><label>Email</label><input id="userEmail" type="email" class="form-control" required></div><div class="form-group"><label>DNI</label><input id="userDni" class="form-control" required></div></div>
+      <div class="form-row"><div class="form-group"><label>Rol</label><select id="userRole" class="form-control"><option value="1">Admin</option><option value="2">Cliente</option></select></div><div class="form-group"><label>Teléfono móvil</label><input id="userMobile" class="form-control"></div></div>
+      <p class="section-kicker form-section-title">Domicilio</p>
+      <div class="form-row"><div class="form-group"><label>Ciudad</label><input id="userCity" class="form-control" required></div><div class="form-group"><label>Provincia</label><input id="userProvince" class="form-control" required></div></div>
+      <div class="form-row"><div class="form-group"><label>Código postal</label><input id="userPostalCode" class="form-control" required></div><div class="form-group"><label>Calle</label><input id="userStreet" class="form-control" required></div></div>
+      <div class="form-group"><label>Número</label><input id="userNumber" class="form-control" required></div>
+      <button class="btn-primary small" type="submit">Guardar usuario</button>
+    </form>
+  </div>
+</section>
+<section class="admin-section hidden" data-admin-panel="categories">
+  <div class="panel"><div class="panel-heading"><div><p class="section-kicker">Catálogo</p><h2>Categorías</h2></div><button id="newCategoryButton" class="btn-primary small" type="button">Nueva categoría</button></div>
+    <div class="table-responsive"><table class="admin-table"><thead><tr><th>Nombre</th><th>Descripción</th><th></th></tr></thead><tbody id="adminCategories"><tr><td colspan="3" class="loading">Cargando categorías...</td></tr></tbody></table></div>
+  </div>
+  <div class="panel admin-edit-panel">
+    <div class="panel-heading"><div><p class="section-kicker">Edición</p><h2 id="categoryFormTitle">Nueva categoría</h2></div><button id="cancelCategoryButton" class="icon-button" type="button">×</button></div>
+    <form id="categoryForm" class="inline-form"><input name="nombre_categoria" id="categoryName" class="form-control" placeholder="Ej. Single Malt" required><input name="descripcion" id="categoryDescription" class="form-control" placeholder="Descripción"><button class="btn-primary small">Crear categoría</button></form>
+  </div>
+</section>
+<section class="admin-section hidden" data-admin-panel="brands">
+  <div class="panel"><div class="panel-heading"><div><p class="section-kicker">Catálogo</p><h2>Marcas</h2></div><button id="newBrandButton" class="btn-primary small" type="button">Nueva marca</button></div>
+    <div class="table-responsive"><table class="admin-table"><thead><tr><th>Marca</th><th>País de origen</th><th></th></tr></thead><tbody id="adminBrands"><tr><td colspan="3" class="loading">Cargando marcas...</td></tr></tbody></table></div>
+  </div>
+  <div class="panel admin-edit-panel">
+    <div class="panel-heading"><div><p class="section-kicker">Edición</p><h2 id="brandFormTitle">Nueva marca</h2></div><button id="cancelBrandButton" class="icon-button" type="button">×</button></div>
+    <form id="brandForm" class="inline-form"><input name="nombre" id="brandName" class="form-control" placeholder="Nombre de marca" required><input name="pais_origen" id="brandCountry" class="form-control" placeholder="País de origen" required><button class="btn-primary small">Crear marca</button></form>
+  </div>
+</section>
 {% endblock %}

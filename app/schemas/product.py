@@ -1,6 +1,6 @@
 from typing import Optional
 from decimal import Decimal
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 # --- CATEGORIA ---
 class CategoriaBase(BaseModel):
@@ -26,12 +26,12 @@ class MarcaResponse(MarcaBase):
 
 # --- PRODUCTO ---
 class ProductoBase(BaseModel):
-    nombre: str
+    nombre: str = Field(min_length=1, max_length=30)
     descripcion: Optional[str] = None
-    precio: Decimal
-    stock: int = 0
-    abv: Decimal
-    volumen_ml: int
+    precio: Decimal = Field(ge=0)
+    stock: int = Field(default=0, ge=0)
+    abv: Decimal = Field(ge=0, le=100)
+    volumen_ml: int = Field(gt=0)
 
 class ProductoCreate(ProductoBase):
     id_categoria_fk: int
