@@ -1,5 +1,6 @@
 import os
 from urllib.parse import quote_plus
+import certifi
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
@@ -19,8 +20,11 @@ class Settings(BaseSettings):
         return (
             f"mysql+pymysql://{self.DB_USER}:{password_encoded}@"
             f"{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
-            f"?ssl_ca=/etc/ssl/certs/ca-certificates.crt"
         )
+
+    @property
+    def DB_SSL_CA(self) -> str:
+        return certifi.where()
 
     class Config:
         env_file = ".env"

@@ -1,6 +1,7 @@
 import os
 import sys
 from urllib.parse import quote_plus
+import certifi
 from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 
@@ -20,11 +21,11 @@ if not USER or not PASSWORD_RAW or not HOST:
 PASSWORD = quote_plus(PASSWORD_RAW)
 
 # Conexión inicial a la BD 'test' para ejecutar la creación de la BD y sus tablas
-DATABASE_URL = f"mysql+pymysql://{USER}:{PASSWORD}@{HOST}:{PORT}/test?ssl_ca=/etc/ssl/certs/ca-certificates.crt"
+DATABASE_URL = f"mysql+pymysql://{USER}:{PASSWORD}@{HOST}:{PORT}/test"
 
 engine = create_engine(
     DATABASE_URL,
-    connect_args={"ssl": {"ca": "/etc/ssl/certs/ca-certificates.crt"}},
+    connect_args={"ssl": {"ca": certifi.where()}},
     pool_pre_ping=True
 )
 
@@ -43,8 +44,8 @@ def ejecutar_schema():
         print("✅ Base de datos y estructuras creadas correctamente en TiDB Cloud.")
 
         # Verificar tablas creadas en la base de datos recién inicializada
-        url_mb = f"mysql+pymysql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}?ssl_ca=/etc/ssl/certs/ca-certificates.crt"
-        engine_mb = create_engine(url_mb, connect_args={"ssl": {"ca": "/etc/ssl/certs/ca-certificates.crt"}})
+        url_mb = f"mysql+pymysql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}"
+        engine_mb = create_engine(url_mb, connect_args={"ssl": {"ca": certifi.where()}})
         with engine_mb.connect() as conn:
             result = conn.execute(text("SHOW TABLES;"))
             tablas = [row[0] for row in result]
