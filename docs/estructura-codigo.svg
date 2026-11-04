@@ -1,0 +1,220 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="950" height="1768" viewBox="0 0 950 1768">
+<defs>
+<style>
+  .bg { fill: #FFFFFF; }
+  .tree { font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace; font-size: 16px; fill: #CBD5E1; white-space: pre; }
+  .name { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; fill: #334155; font-weight: 500; }
+  .name-folder { fill: #0F172A; font-weight: 600; }
+  .comment { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #94A3B8; font-style: italic; }
+  .icon { fill: #94A3B8; }
+  .icon-folder { fill: #64748B; }
+</style>
+<g id="fld">
+  <path class="icon-folder" d="M2 4a2 2 0 012-2h4.5a2 2 0 011.41.59l1.18 1.18c.19.19.44.29.7.29H16a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/>
+</g>
+<g id="doc">
+  <path class="icon" d="M4 3a2 2 0 012-2h5.5a1 1 0 01.71.29l3.5 3.5A1 1 0 0116 5.5V17a2 2 0 01-2 2H6a2 2 0 01-2-2V3z"/>
+</g>
+</defs>
+<rect width="100%" height="100%" class="bg" rx="12" />
+  <text x="30" y="40" class="tree" xml:space="preserve"></text>
+  <use href="#fld" x="30.0" y="28" width="15" height="15" />
+  <text x="52.0" y="40" class="name name-folder">moonshine-ballad</text>
+  <text x="30" y="68" class="tree" xml:space="preserve">├── </text>
+  <use href="#doc" x="68.47999999999999" y="56" width="15" height="15" />
+  <text x="90.47999999999999" y="68" class="name">.env.example</text>
+  <text x="400" y="68" class="comment"># Plantilla de variables de entorno requeridas</text>
+  <text x="30" y="96" class="tree" xml:space="preserve">├── </text>
+  <use href="#doc" x="68.47999999999999" y="84" width="15" height="15" />
+  <text x="90.47999999999999" y="96" class="name">.gitignore</text>
+  <text x="400" y="96" class="comment"># Reglas de exclusión de Git</text>
+  <text x="30" y="124" class="tree" xml:space="preserve">├── </text>
+  <use href="#doc" x="68.47999999999999" y="112" width="15" height="15" />
+  <text x="90.47999999999999" y="124" class="name">README.md</text>
+  <text x="400" y="124" class="comment"># Documentación del proyecto</text>
+  <text x="30" y="152" class="tree" xml:space="preserve">├── </text>
+  <use href="#doc" x="68.47999999999999" y="140" width="15" height="15" />
+  <text x="90.47999999999999" y="152" class="name">requirements.txt</text>
+  <text x="400" y="152" class="comment"># Dependencias de Python</text>
+  <text x="30" y="180" class="tree" xml:space="preserve">├── </text>
+  <use href="#doc" x="68.47999999999999" y="168" width="15" height="15" />
+  <text x="90.47999999999999" y="180" class="name">vercel.json</text>
+  <text x="400" y="180" class="comment"># Configuración de despliegue para Vercel</text>
+  <text x="30" y="208" class="tree" xml:space="preserve">│</text>
+  <text x="30" y="236" class="tree" xml:space="preserve">├── </text>
+  <use href="#fld" x="68.47999999999999" y="224" width="15" height="15" />
+  <text x="90.47999999999999" y="236" class="name name-folder">api</text>
+  <text x="30" y="264" class="tree" xml:space="preserve">│   └── </text>
+  <use href="#doc" x="106.96" y="252" width="15" height="15" />
+  <text x="128.95999999999998" y="264" class="name">index.py</text>
+  <text x="400" y="264" class="comment"># Punto de entrada para las funciones Serverless de Vercel</text>
+  <text x="30" y="292" class="tree" xml:space="preserve">│</text>
+  <text x="30" y="320" class="tree" xml:space="preserve">├── </text>
+  <use href="#fld" x="68.47999999999999" y="308" width="15" height="15" />
+  <text x="90.47999999999999" y="320" class="name name-folder">app</text>
+  <text x="30" y="348" class="tree" xml:space="preserve">│   ├── </text>
+  <use href="#doc" x="106.96" y="336" width="15" height="15" />
+  <text x="128.95999999999998" y="348" class="name">main.py</text>
+  <text x="400" y="348" class="comment"># Inicialización de la app FastAPI, middlewares y rutas</text>
+  <text x="30" y="376" class="tree" xml:space="preserve">│   ├── </text>
+  <use href="#doc" x="106.96" y="364" width="15" height="15" />
+  <text x="128.95999999999998" y="376" class="name">config.py</text>
+  <text x="400" y="376" class="comment"># Configuración global y lectura de variables de entorno</text>
+  <text x="30" y="404" class="tree" xml:space="preserve">│   ├── </text>
+  <use href="#doc" x="106.96" y="392" width="15" height="15" />
+  <text x="128.95999999999998" y="404" class="name">database.py</text>
+  <text x="400" y="404" class="comment"># Conexión a la base de datos MySQL (Engine y Session)</text>
+  <text x="30" y="432" class="tree" xml:space="preserve">│   │</text>
+  <text x="30" y="460" class="tree" xml:space="preserve">│   ├── </text>
+  <use href="#fld" x="106.96" y="448" width="15" height="15" />
+  <text x="128.95999999999998" y="460" class="name name-folder">core</text>
+  <text x="400" y="460" class="comment"># Utilidades de infraestructura y seguridad</text>
+  <text x="30" y="488" class="tree" xml:space="preserve">│   │   ├── </text>
+  <use href="#doc" x="145.44" y="476" width="15" height="15" />
+  <text x="167.44" y="488" class="name">deps.py</text>
+  <text x="400" y="488" class="comment"># Inyección de dependencias (sesión BD, verificación JWT y roles)</text>
+  <text x="30" y="516" class="tree" xml:space="preserve">│   │   └── </text>
+  <use href="#doc" x="145.44" y="504" width="15" height="15" />
+  <text x="167.44" y="516" class="name">security.py</text>
+  <text x="400" y="516" class="comment"># Lógica de hashing de contraseñas y firma de tokens</text>
+  <text x="30" y="544" class="tree" xml:space="preserve">│   │</text>
+  <text x="30" y="572" class="tree" xml:space="preserve">│   ├── </text>
+  <use href="#fld" x="106.96" y="560" width="15" height="15" />
+  <text x="128.95999999999998" y="572" class="name name-folder">models</text>
+  <text x="400" y="572" class="comment"># Modelos relacionales ORM (SQLAlchemy)</text>
+  <text x="30" y="600" class="tree" xml:space="preserve">│   │   ├── </text>
+  <use href="#doc" x="145.44" y="588" width="15" height="15" />
+  <text x="167.44" y="600" class="name">product.py</text>
+  <text x="400" y="600" class="comment"># Tablas de licores, categorías, marcas y stock</text>
+  <text x="30" y="628" class="tree" xml:space="preserve">│   │   └── </text>
+  <use href="#doc" x="145.44" y="616" width="15" height="15" />
+  <text x="167.44" y="628" class="name">user.py</text>
+  <text x="400" y="628" class="comment"># Tablas de usuarios, roles y autenticación</text>
+  <text x="30" y="656" class="tree" xml:space="preserve">│   │</text>
+  <text x="30" y="684" class="tree" xml:space="preserve">│   ├── </text>
+  <use href="#fld" x="106.96" y="672" width="15" height="15" />
+  <text x="128.95999999999998" y="684" class="name name-folder">schemas</text>
+  <text x="400" y="684" class="comment"># Validación y serialización de datos (Pydantic)</text>
+  <text x="30" y="712" class="tree" xml:space="preserve">│   │   ├── </text>
+  <use href="#doc" x="145.44" y="700" width="15" height="15" />
+  <text x="167.44" y="712" class="name">auth.py</text>
+  <text x="400" y="712" class="comment"># Esquemas para login y respuesta de tokens</text>
+  <text x="30" y="740" class="tree" xml:space="preserve">│   │   ├── </text>
+  <use href="#doc" x="145.44" y="728" width="15" height="15" />
+  <text x="167.44" y="740" class="name">product.py</text>
+  <text x="400" y="740" class="comment"># Esquemas para creación y consulta de productos</text>
+  <text x="30" y="768" class="tree" xml:space="preserve">│   │   └── </text>
+  <use href="#doc" x="145.44" y="756" width="15" height="15" />
+  <text x="167.44" y="768" class="name">user.py</text>
+  <text x="400" y="768" class="comment"># Esquemas para registro y gestión de usuarios</text>
+  <text x="30" y="796" class="tree" xml:space="preserve">│   │</text>
+  <text x="30" y="824" class="tree" xml:space="preserve">│   ├── </text>
+  <use href="#fld" x="106.96" y="812" width="15" height="15" />
+  <text x="128.95999999999998" y="824" class="name name-folder">routers</text>
+  <text x="400" y="824" class="comment"># Controladores de endpoints (API REST)</text>
+  <text x="30" y="852" class="tree" xml:space="preserve">│   │   ├── </text>
+  <use href="#doc" x="145.44" y="840" width="15" height="15" />
+  <text x="167.44" y="852" class="name">admin.py</text>
+  <text x="400" y="852" class="comment"># Endpoints protegidos (CRUD de catálogo, usuarios y reportes)</text>
+  <text x="30" y="880" class="tree" xml:space="preserve">│   │   ├── </text>
+  <use href="#doc" x="145.44" y="868" width="15" height="15" />
+  <text x="167.44" y="880" class="name">auth.py</text>
+  <text x="400" y="880" class="comment"># Endpoints públicos (/login, /register)</text>
+  <text x="30" y="908" class="tree" xml:space="preserve">│   │   └── </text>
+  <use href="#doc" x="145.44" y="896" width="15" height="15" />
+  <text x="167.44" y="908" class="name">client.py</text>
+  <text x="400" y="908" class="comment"># Endpoints de cliente (ver catálogo, carrito, órdenes)</text>
+  <text x="30" y="936" class="tree" xml:space="preserve">│   │</text>
+  <text x="30" y="964" class="tree" xml:space="preserve">│   └── </text>
+  <use href="#fld" x="106.96" y="952" width="15" height="15" />
+  <text x="128.95999999999998" y="964" class="name name-folder">static</text>
+  <text x="400" y="964" class="comment"># Archivos estáticos de la interfaz web</text>
+  <text x="30" y="992" class="tree" xml:space="preserve">│       ├── </text>
+  <use href="#fld" x="145.44" y="980" width="15" height="15" />
+  <text x="167.44" y="992" class="name name-folder">css</text>
+  <text x="400" y="992" class="comment"># Hojas de estilo</text>
+  <text x="30" y="1020" class="tree" xml:space="preserve">│       │   └── </text>
+  <use href="#doc" x="183.92" y="1008" width="15" height="15" />
+  <text x="205.92" y="1020" class="name">main.css</text>
+  <text x="400" y="1020" class="comment"># Estilos globales de la interfaz</text>
+  <text x="30" y="1048" class="tree" xml:space="preserve">│       └── </text>
+  <use href="#fld" x="145.44" y="1036" width="15" height="15" />
+  <text x="167.44" y="1048" class="name name-folder">js</text>
+  <text x="400" y="1048" class="comment"># Scripts de interacción y consumos de la API</text>
+  <text x="30" y="1076" class="tree" xml:space="preserve">│           └── </text>
+  <use href="#doc" x="183.92" y="1064" width="15" height="15" />
+  <text x="205.92" y="1076" class="name">main.js</text>
+  <text x="400" y="1076" class="comment"># Lógica e interacciones JavaScript</text>
+  <text x="30" y="1104" class="tree" xml:space="preserve">│</text>
+  <text x="30" y="1132" class="tree" xml:space="preserve">├── </text>
+  <use href="#fld" x="68.47999999999999" y="1120" width="15" height="15" />
+  <text x="90.47999999999999" y="1132" class="name name-folder">assets</text>
+  <text x="400" y="1132" class="comment"># Recursos de diseño (branding del repo, banners y logos)</text>
+  <text x="30" y="1160" class="tree" xml:space="preserve">│   ├── </text>
+  <use href="#doc" x="106.96" y="1148" width="15" height="15" />
+  <text x="128.95999999999998" y="1160" class="name">gh-dark.svg</text>
+  <text x="30" y="1188" class="tree" xml:space="preserve">│   ├── </text>
+  <use href="#doc" x="106.96" y="1176" width="15" height="15" />
+  <text x="128.95999999999998" y="1188" class="name">mb-dark.svg</text>
+  <text x="30" y="1216" class="tree" xml:space="preserve">│   └── </text>
+  <use href="#doc" x="106.96" y="1204" width="15" height="15" />
+  <text x="128.95999999999998" y="1216" class="name">mb-light.svg</text>
+  <text x="30" y="1244" class="tree" xml:space="preserve">│</text>
+  <text x="30" y="1272" class="tree" xml:space="preserve">├── </text>
+  <use href="#fld" x="68.47999999999999" y="1260" width="15" height="15" />
+  <text x="90.47999999999999" y="1272" class="name name-folder">db</text>
+  <text x="400" y="1272" class="comment"># Entregables técnicos de la materia</text>
+  <text x="30" y="1300" class="tree" xml:space="preserve">│   ├── </text>
+  <use href="#doc" x="106.96" y="1288" width="15" height="15" />
+  <text x="128.95999999999998" y="1300" class="name">schema.sql</text>
+  <text x="400" y="1300" class="comment"># Script DDL de creación de tablas y restricciones</text>
+  <text x="30" y="1328" class="tree" xml:space="preserve">│   ├── </text>
+  <use href="#doc" x="106.96" y="1316" width="15" height="15" />
+  <text x="128.95999999999998" y="1328" class="name">seed.sql</text>
+  <text x="400" y="1328" class="comment"># Script DML con datos de prueba e inserts iniciales</text>
+  <text x="30" y="1356" class="tree" xml:space="preserve">│   └── </text>
+  <use href="#doc" x="106.96" y="1344" width="15" height="15" />
+  <text x="128.95999999999998" y="1356" class="name">queries.sql</text>
+  <text x="400" y="1356" class="comment"># Consultas SQL complejas (JOINs, GROUP BY, subconsultas)</text>
+  <text x="30" y="1384" class="tree" xml:space="preserve">│</text>
+  <text x="30" y="1412" class="tree" xml:space="preserve">├── </text>
+  <use href="#fld" x="68.47999999999999" y="1400" width="15" height="15" />
+  <text x="90.47999999999999" y="1412" class="name name-folder">docs</text>
+  <text x="400" y="1412" class="comment"># Documentación y diagramas del TP</text>
+  <text x="30" y="1440" class="tree" xml:space="preserve">│   ├── </text>
+  <use href="#fld" x="106.96" y="1428" width="15" height="15" />
+  <text x="128.95999999999998" y="1440" class="name name-folder">diagramas</text>
+  <text x="400" y="1440" class="comment"># DER, pasaje a tablas y diagramas de flujo (imágenes)</text>
+  <text x="30" y="1468" class="tree" xml:space="preserve">│   │   ├── </text>
+  <use href="#doc" x="145.44" y="1456" width="15" height="15" />
+  <text x="167.44" y="1468" class="name">der.png</text>
+  <text x="30" y="1496" class="tree" xml:space="preserve">│   │   └── </text>
+  <use href="#doc" x="145.44" y="1484" width="15" height="15" />
+  <text x="167.44" y="1496" class="name">tablas_relacional.png</text>
+  <text x="30" y="1524" class="tree" xml:space="preserve">│   │ </text>
+  <text x="30" y="1552" class="tree" xml:space="preserve">│   └── </text>
+  <use href="#doc" x="106.96" y="1540" width="15" height="15" />
+  <text x="128.95999999999998" y="1552" class="name">especificacion.md</text>
+  <text x="400" y="1552" class="comment"># Explicación escrita de entidades, cardinalidad y reglas del TP</text>
+  <text x="30" y="1580" class="tree" xml:space="preserve">│</text>
+  <text x="30" y="1608" class="tree" xml:space="preserve">└── </text>
+  <use href="#fld" x="68.47999999999999" y="1596" width="15" height="15" />
+  <text x="90.47999999999999" y="1608" class="name name-folder">templates</text>
+  <text x="400" y="1608" class="comment"># Plantillas HTML de la interfaz</text>
+  <text x="30" y="1636" class="tree" xml:space="preserve">    ├── </text>
+  <use href="#doc" x="106.96" y="1624" width="15" height="15" />
+  <text x="128.95999999999998" y="1636" class="name">admin_dashboard.html</text>
+  <text x="400" y="1636" class="comment"># Panel de administración</text>
+  <text x="30" y="1664" class="tree" xml:space="preserve">    ├── </text>
+  <use href="#doc" x="106.96" y="1652" width="15" height="15" />
+  <text x="128.95999999999998" y="1664" class="name">base.html</text>
+  <text x="400" y="1664" class="comment"># Layout base</text>
+  <text x="30" y="1692" class="tree" xml:space="preserve">    ├── </text>
+  <use href="#doc" x="106.96" y="1680" width="15" height="15" />
+  <text x="128.95999999999998" y="1692" class="name">login.html</text>
+  <text x="400" y="1692" class="comment"># Pantalla de acceso</text>
+  <text x="30" y="1720" class="tree" xml:space="preserve">    └── </text>
+  <use href="#doc" x="106.96" y="1708" width="15" height="15" />
+  <text x="128.95999999999998" y="1720" class="name">store.html</text>
+  <text x="400" y="1720" class="comment"># Tienda para usuarios</text>
+</svg>
