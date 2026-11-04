@@ -6,6 +6,7 @@ from fastapi.responses import HTMLResponse
 
 # Importaciones del backend
 from app.config import settings
+from app.database import ensure_schema_compatibility
 from app.routers import auth, client, admin
 
 # Directorio base del proyecto (raíz)
@@ -26,6 +27,11 @@ templates = Jinja2Templates(directory=BASE_DIR / "templates")
 app.include_router(auth.router)
 app.include_router(client.router)
 app.include_router(admin.router)
+
+
+@app.on_event("startup")
+def prepare_database():
+    ensure_schema_compatibility()
 
 
 # --- Rutas Web (Frontend Jinja2) ---

@@ -1,5 +1,5 @@
 const state = { cart: [], products: [], options: null, users: [], categories: [], brands: [] };
-const fallbackImage = "https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=700";
+const fallbackImage = "/static/img/whisky-fallback.svg";
 
 const money = value => {
   const amount = Number(value);
@@ -131,7 +131,7 @@ function filterProducts(category = "All") {
   const products = category === "All" ? state.products : state.products.filter(item => item.categoria === category);
   grid.innerHTML = products.length ? products.map(product => `
     <article class="card">
-      <img src="${escapeHtml(product.imagen_url || fallbackImage)}" class="card-img" alt="${escapeHtml(product.nombre)}" loading="lazy">
+      <img src="${escapeHtml(product.imagen_url || fallbackImage)}" onerror="this.onerror=null;this.src='${fallbackImage}'" class="card-img" alt="${escapeHtml(product.nombre)}" loading="lazy">
       <div class="card-body"><span class="badge">${escapeHtml(product.categoria)}</span>
         <h3 class="card-title">${escapeHtml(product.nombre)}</h3>
         <p class="muted product-meta">${Number(product.abv)}% ABV · ${product.volumen_ml} ml · ${escapeHtml(product.marca)}</p>
@@ -211,8 +211,8 @@ function editProduct(productId) {
   if (!product) return;
   document.getElementById("productId").value = product.id_producto;
   document.getElementById("formTitle").textContent = "Editar producto";
-  ["Name", "Category", "Brand", "Price", "Stock", "Abv", "Volume", "Description"].forEach(name => {
-    const key = name === "Name" ? "nombre" : name === "Category" ? "id_categoria_fk" : name === "Brand" ? "id_marca_fk" : name === "Price" ? "precio" : name === "Stock" ? "stock" : name === "Abv" ? "abv" : name === "Volume" ? "volumen_ml" : "descripcion";
+  ["Name", "Category", "Brand", "Price", "Stock", "Abv", "Volume", "Description", "ImageUrl"].forEach(name => {
+    const key = name === "Name" ? "nombre" : name === "Category" ? "id_categoria_fk" : name === "Brand" ? "id_marca_fk" : name === "Price" ? "precio" : name === "Stock" ? "stock" : name === "Abv" ? "abv" : name === "Volume" ? "volumen_ml" : name === "Description" ? "descripcion" : "imagen_url";
     document.getElementById(`product${name}`).value = product[key] ?? "";
   });
   document.querySelector(".product-form-panel").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -348,6 +348,7 @@ async function saveProduct(event) {
     abv: Number(document.getElementById("productAbv").value),
     volumen_ml: Number(document.getElementById("productVolume").value),
     descripcion: document.getElementById("productDescription").value || null,
+    imagen_url: document.getElementById("productImageUrl").value.trim() || null,
     id_proveedor_fk: null
   };
   if (!Number.isFinite(payload.precio) || payload.precio < 0) {

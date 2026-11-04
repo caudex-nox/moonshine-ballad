@@ -28,6 +28,7 @@ class MarcaResponse(MarcaBase):
 class ProductoBase(BaseModel):
     nombre: str = Field(min_length=1, max_length=30)
     descripcion: Optional[str] = None
+    imagen_url: Optional[str] = Field(default=None, max_length=500)
     precio: Decimal = Field(ge=0)
     stock: int = Field(default=0, ge=0)
     abv: Decimal = Field(ge=0, le=100)

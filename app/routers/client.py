@@ -22,7 +22,7 @@ def obtener_whiskies(
     db: Session = Depends(get_db),
 ):
     query = text("""
-        SELECT p.id_producto, p.nombre, p.descripcion, p.precio, p.stock,
+        SELECT p.id_producto, p.nombre, p.descripcion, p.imagen_url, p.precio, p.stock,
                p.abv, p.volumen_ml, p.id_categoria_fk, p.id_marca_fk,
                p.id_proveedor_fk, c.nombre_categoria AS categoria, m.nombre AS marca
         FROM productos p

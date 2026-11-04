@@ -38,7 +38,7 @@ class UsuarioUpdate(BaseModel):
 @router.get("/productos")
 def listar_productos(db: Session = Depends(get_db)):
     query = text("""
-        SELECT p.id_producto, p.nombre, p.descripcion, p.precio, p.stock,
+        SELECT p.id_producto, p.nombre, p.descripcion, p.imagen_url, p.precio, p.stock,
                p.abv, p.volumen_ml, p.id_categoria_fk, p.id_marca_fk,
                p.id_proveedor_fk, c.nombre_categoria AS categoria, m.nombre AS marca
         FROM productos p
@@ -193,15 +193,17 @@ def actualizar_marca(marca_id: int, datos: MarcaCreate, db: Session = Depends(ge
 
 @router.post("/productos", response_model=ProductoResponse, status_code=201)
 def agregar_producto(datos: ProductoCreate, db: Session = Depends(get_db)):
+    values = datos.model_dump()
+    values["imagen_url"] = (values.get("imagen_url") or "").strip() or None
     query = text("""
         INSERT INTO productos
           (id_categoria_fk, id_marca_fk, id_proveedor_fk, nombre, descripcion,
-           precio, stock, abv, volumen_ml)
+           imagen_url, precio, stock, abv, volumen_ml)
         VALUES
           (:id_categoria_fk, :id_marca_fk, :id_proveedor_fk, :nombre, :descripcion,
-           :precio, :stock, :abv, :volumen_ml)
+           :imagen_url, :precio, :stock, :abv, :volumen_ml)
     """)
-    result = db.execute(query, datos.model_dump())
+    result = db.execute(query, values)
     db.commit()
     product_id = result.lastrowid
     product = db.execute(
@@ -218,6 +220,7 @@ def actualizar_producto(
     db: Session = Depends(get_db),
 ):
     values = datos.model_dump()
+    values["imagen_url"] = (values.get("imagen_url") or "").strip() or None
     values["producto_id"] = producto_id
     exists = db.execute(
         text("SELECT 1 FROM productos WHERE id_producto = :id"),
@@ -229,7 +232,8 @@ def actualizar_producto(
         UPDATE productos
         SET id_categoria_fk = :id_categoria_fk, id_marca_fk = :id_marca_fk,
             id_proveedor_fk = :id_proveedor_fk, nombre = :nombre,
-            descripcion = :descripcion, precio = :precio, stock = :stock,
+            descripcion = :descripcion, imagen_url = :imagen_url,
+            precio = :precio, stock = :stock,
             abv = :abv, volumen_ml = :volumen_ml
         WHERE id_producto = :producto_id
     """), values)

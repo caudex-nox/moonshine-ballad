@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS productos (
     id_proveedor_fk INT,
     nombre VARCHAR(30) NOT NULL,
     descripcion TEXT,
+    imagen_url VARCHAR(500),
     precio DECIMAL(10, 2) NOT NULL,
     stock INT NOT NULL DEFAULT 0,
     abv DECIMAL(4, 1) NOT NULL,
