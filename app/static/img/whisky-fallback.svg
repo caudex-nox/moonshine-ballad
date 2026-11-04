@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Botella y vaso de whisky</title>
+  <desc id="desc">Ilustración genérica de una botella de whisky junto a un vaso</desc>
+  <rect width="800" height="600" fill="#eee8df"/>
+  <ellipse cx="400" cy="505" rx="270" ry="28" fill="#d8cfc4"/>
+  <g stroke="#6b5545" stroke-width="8">
+    <path d="M265 155h155v35c0 25 28 40 28 78v190c0 25-18 42-43 42H280c-25 0-43-17-43-42V268c0-38 28-53 28-78v-35z" fill="#a46a35"/>
+    <path d="M298 155v-45h89v45" fill="#a46a35"/>
+    <path d="M290 110h105v28H290z" fill="#d6b06a"/>
+    <path d="M265 295h155v88H265z" fill="#d9b36b" stroke="none"/>
+    <path d="M520 300h115v135c0 30-25 53-57 53s-58-23-58-53z" fill="#d8a85f" fill-opacity=".72"/>
+    <path d="M520 300h115" fill="none"/>
+    <path d="M520 435h115" fill="none"/>
+  </g>
+  <path d="M505 488h145" stroke="#6b5545" stroke-width="8"/>
+</svg>
