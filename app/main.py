@@ -1,11 +1,15 @@
+from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 
-# Importaciones del backend creadas por tu compañero
+# Importaciones del backend
 from app.config import settings
 from app.routers import auth, client, admin
+
+# Directorio base del proyecto (raíz)
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 1. Instancia principal de FastAPI
 app = FastAPI(
@@ -14,11 +18,11 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# 2. Configuración de archivos estáticos y plantillas Jinja2 (Frontend)
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
-templates = Jinja2Templates(directory="templates")
+# 2. Configuración de archivos estáticos y plantillas Jinja2 con rutas absolutas
+app.mount("/static", StaticFiles(directory=BASE_DIR / "app" / "static"), name="static")
+templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
-# 3. Registrar los routers de la API (Backend de tu compañero)
+# 3. Registrar los routers de la API
 app.include_router(auth.router)
 app.include_router(client.router)
 app.include_router(admin.router)
