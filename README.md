@@ -46,7 +46,7 @@ moonshine-ballad/
 │
 ├── app/
 │   ├── main.py               # Inicialización de la app FastAPI, middlewares y rutas
-│   ├── config.py             # Configuración global y lectura de variables de entorno
+│   ├── config.py              # Configuración global y lectura de variables de entorno
 │   ├── database.py           # Conexión a la base de datos MySQL (Engine y Session)
 │   │
 │   ├── core/                 # Utilidades de infraestructura y seguridad
@@ -74,11 +74,13 @@ moonshine-ballad/
 │           └── main.js       # Lógica e interacciones JavaScript    
 │
 ├── assets/                   # Recursos de diseño (branding del repo, banners y logos)
+│   ├── gh-dark.svg
 │   ├── mb-dark.svg
 │   └── mb-light.svg
 │
 ├── db/                       # Entregables técnicos de la materia
 │   ├── schema.sql            # Script DDL de creación de tablas y restricciones
+│   ├── seed.sql              # Script DML con datos de prueba e inserts iniciales
 │   └── queries.sql           # Consultas SQL complejas (JOINs, GROUP BY, subconsultas)
 │
 ├── docs/                     # Documentación y diagramas del TP
