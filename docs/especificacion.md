@@ -86,6 +86,7 @@ erDiagram
         int id_proveedor_fk FK
         string nombre
         string descripcion
+        string imagen_url
         decimal precio
         int stock
         decimal abv
@@ -192,6 +193,7 @@ erDiagram
 - **`id_proveedor_fk`** (FK, INT, Nullable) — Referencia al distribuidor oficial del ítem.
 - **`nombre`** (VARCHAR(30)) — Etiqueta comercial del licor (ej. *Double Cask 12 Year*).
 - **`descripcion`** (TEXT) — Notas de cata, maridaje y tiempo de añejamiento.
+- **`imagen_url`** (VARCHAR(500), Nullable) — URL opcional de la imagen del producto. Si no se informa o no está disponible, la interfaz utiliza una imagen genérica de fallback.
 - **`precio`** (DECIMAL(10, 2)) — Precio de venta por unidad en moneda local.
 - **`stock`** (INT) — Cantidad de botellas disponibles en depósito.
 - **`abv`** (DECIMAL(4, 1)) — Graduación alcohólica volumétrica (% ABV).

@@ -100,12 +100,12 @@ moonshine-ballad/
 ## Roles de Usuario
 
 1. **Administrador (`admin`):**
-   * Gestión completa del catálogo de whiskies (crear, editar, eliminar productos).
+   * Gestión completa del catálogo de whiskies (crear, editar, eliminar productos e indicar opcionalmente una URL de imagen).
    * Control de stock y categorías.
    * Visualización del histórico de ventas y usuarios registrados.
 
 2. **Cliente (`usuario`):**
-   * Exploración del catálogo de productos disponible.
+   * Exploración del catálogo de productos disponible, con imagen personalizada o fallback visual cuando no existe una URL.
    * Filtrado de whiskies por categoría, tipo o precio.
    * Registro, inicio de sesión y gestión del perfil personal.
 
